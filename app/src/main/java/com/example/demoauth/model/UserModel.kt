@@ -16,9 +16,14 @@ class UserModel(private val context: Context) {
         }
     }
 
+    fun saveAutoLoginState(isEnabled: Boolean) {
+        val sharedPreferences = context.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE)
+        sharedPreferences.edit().putBoolean("AUTO_LOGIN", isEnabled).apply()
+    }
+
     fun isAutoLoginEnabled(): Boolean {
         val sharedPreferences = context.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE)
-        return sharedPreferences.getBoolean("REMEMBER_ME", false) && auth.currentUser != null
+        return sharedPreferences.getBoolean("AUTO_LOGIN", false) && auth.currentUser != null
     }
 
     fun register(email: String, password: String, callback: (Boolean, String?) -> Unit) {

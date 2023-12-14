@@ -9,6 +9,7 @@ class LoginController(private val view: LoginActivity, private val userModel: Us
     fun login(email: String, password: String) {
         userModel.login(email, password) { isSuccess, error ->
             if (isSuccess) {
+                userModel.saveAutoLoginState(true)
                 view.onLoginSuccess()
             } else {
                 view.onLoginFailure(error ?: "Login failed")
