@@ -20,10 +20,11 @@ class RegisterActivity : AppCompatActivity() {
         registerController = RegisterController(this, UserModel(this))
 
         binding.registerButton.setOnClickListener {
+            val username = binding.username.text.toString()
             val email = binding.email.text.toString()
             val password = binding.password.text.toString()
             val confirmPassword = binding.confirmPassword.text.toString()
-            registerController.register(email, password, confirmPassword)
+            registerController.register(username, email, password, confirmPassword)
         }
 
         binding.goToLoginButton.setOnClickListener {
@@ -33,6 +34,7 @@ class RegisterActivity : AppCompatActivity() {
 
     fun showInputError(errorField: String, errorMessage: String) {
         when (errorField) {
+            "username" -> binding.textInputLayoutUsername.error = errorMessage
             "email" -> binding.textInputLayoutEmail.error = errorMessage
             "password" -> binding.textInputLayoutPassword.error = errorMessage
             "confirmPassword" -> binding.textInputLayoutConfirmPassword.error = errorMessage
